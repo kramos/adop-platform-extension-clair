@@ -1,0 +1,34 @@
+version: '2'
+services:
+  postgres:
+    container_name: clair_postgres
+    restart: always
+    image: postgres:latest
+    networks:
+      - ${DOCKER_NETWORK_NAME}
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  clair:
+    container_name: clair_clair
+    image: quay.io/coreos/clair:v1.2.2
+    #restart: always
+    depends_on:
+      - postgres
+    networks:
+      - ${DOCKER_NETWORK_NAME}
+    ports:
+      - "6060-6061:6060-6061"
+    links:
+      - postgres
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /tmp:/tmp
+      - ./clair_config:/config
+    command: [-config, /config/config.yaml]
+
+networks:
+  local_network:
+    external: true
