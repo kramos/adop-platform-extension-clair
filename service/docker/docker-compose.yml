@@ -13,7 +13,7 @@ services:
 
   clair:
     container_name: clair_clair
-    image: quay.io/coreos/clair:v1.2.2
+    build: ./build 
     #restart: always
     depends_on:
       - postgres
@@ -26,7 +26,6 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - /tmp:/tmp
-      - ./clair_config:/config
     command: [-config, /config/config.yaml]
 
 networks:
