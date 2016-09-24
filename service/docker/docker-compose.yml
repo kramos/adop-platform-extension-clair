@@ -14,7 +14,7 @@ services:
   clair:
     container_name: clair_clair
     build: ./build 
-    #restart: always
+    restart: always
     depends_on:
       - postgres
     networks:
