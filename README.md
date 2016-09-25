@@ -1,4 +1,4 @@
-# IRIS Platform Extension Specification
+# Clair Platform Extension Specification
 The purpose of this repository is to define the docker-based [Clair](https://github.com/coreos/clair) platform extension specification.
 
 This extention is designed to support cartridges based on the [reference Docker pipeline](https://github.com/Accenture/adop-cartridge-docker).
